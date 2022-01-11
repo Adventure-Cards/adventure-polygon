@@ -3,6 +3,7 @@
 */cache
 */coverage
 */node_modules
+node_modules
 */coverage.json
 credentials.json
 
