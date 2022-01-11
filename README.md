@@ -3,7 +3,7 @@
 The Adventure Cards project has cards packs issued on mainnet and is considering
 unbundling them. Unbundling on mainnet would be expensive for the users, therefore
 this repository provides mechanisms for unbundling the contracts on the Polygon
-network. 
+network.
 
 The directory `snapshot` includes a standalone web3 script that scans mainnet
 for owners of the individual cards and creates a CSV. A mild modification of
@@ -15,6 +15,10 @@ packs of Adventure Cards on Polygon, and handle further unbundling. The followin
 sequence of steps should be followed to unbundle the cards:
 
 1. Create a snapshot of owners on mainnet
+
+- add credentials to json. use a local node or infura paid archive node
+- node query.js > packs.out
+
 2. Deploy the contracts on Polygon
 3. Drop the packs to owners on Polygon based on the snapshots
 4. Configure individual Adventure Cards in the AdventureCards contract
@@ -40,4 +44,3 @@ the unbundling process starting. The contract allows setting individual URLs
 with art for each card type in order to support the art that is currently
 uploaded to arweave. The contract also provides a hook for card semantics
 which can be useful for the future development of the game.
-
