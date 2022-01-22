@@ -5,7 +5,7 @@ pragma solidity 0.8.6;
 import "./legacy/Card.sol";
 import "./interface/IAdventureCards.sol";
 
-/** 
+/**
  * @dev A contract the matches the Adventure Cards contract
  * on mainnet, but forbids several admin methods that
  * do not have a meaning. The contract allows a privileged
@@ -64,8 +64,8 @@ contract Pack is Card {
   /**
    * @dev Mints packs to the recipient based on a snapshot, and marks the packs
    * as minted (thus can be called only once on each pack).
-   * 
-   * @param recipient The account to receive the pack 
+   *
+   * @param recipient The account to receive the pack
    * @param tokenId The ID of the pack
    */
   function snapshotMint(address recipient, uint256 tokenId) external onlySnapshot {
@@ -86,7 +86,7 @@ contract Pack is Card {
   function unbundle(uint256 tokenId) external {
     require(ownerOf(tokenId) == msg.sender, "Only owner can unbundle");
 
-    // unbundle individual cards  
+    // unbundle individual cards
     for (uint256 i = 0; i < 45; i++) {
       string memory card = getCardTitle(tokenId, i);
       IAdventureCards(adventureCards).unbundleMint(msg.sender, card);
@@ -109,11 +109,11 @@ contract Pack is Card {
     snapshot[_snapshot] = _value;
     emit SnapshotSet(_snapshot, _value);
   }
-  
+
   /**
    * @dev Admin method to set the reference to the ERC1155 Adventure Cards
    *
-   * @param _adventureCards The contract address to be set in 
+   * @param _adventureCards The contract address to be set in
    */
   function setAdventureCards(address _adventureCards) external onlyOwner {
     adventureCards = _adventureCards;

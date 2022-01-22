@@ -1,12 +1,12 @@
-require("@nomiclabs/hardhat-waffle");
-require("@nomiclabs/hardhat-truffle5");
+require('@nomiclabs/hardhat-waffle');
+require('@nomiclabs/hardhat-truffle5');
 require('solidity-coverage');
 
 const credentials = require('./credentials.json');
 
 module.exports = {
   solidity: {
-    version: "0.8.6",
+    version: '0.8.6',
     settings: {
       optimizer: {
         enabled: true,
@@ -23,6 +23,6 @@ module.exports = {
     },
   },
   mocha: {
-    timeout: 200000
-  }
+    timeout: 200000,
+  },
 };
