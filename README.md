@@ -24,6 +24,9 @@ sequence of steps should be followed to unbundle the cards:
 4. Configure individual Adventure Cards in the AdventureCards contract
 5. The users unbundle the cards themselves
 
+Card.sol -> mostly same as mainnet deploy + virtual functions
+Pack.sol -> descends from Card.sol + []
+
 The `Pack.sol` contract is a verbatim copy of `Card.sol` on mainnet
 (0x329Fd5E0d9aAd262b13CA07C87d001bec716ED39) with some added functionality
 for the drop handling. The implementation is done via inheriting from the
