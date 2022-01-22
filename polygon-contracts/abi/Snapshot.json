@@ -1,0 +1,20 @@
+[
+  "constructor()",
+  "event Frozen()",
+  "event Minted(uint256,uint256)",
+  "event OwnershipTransferred(address indexed,address indexed)",
+  "event PackSet(address)",
+  "function freeze()",
+  "function frozen() view returns (bool)",
+  "function mint(uint256,uint256)",
+  "function minted(uint256) view returns (bool)",
+  "function owner() view returns (address)",
+  "function owners(uint256) view returns (address)",
+  "function pack() view returns (address)",
+  "function renounceOwnership()",
+  "function setOwners(address[],uint256[])",
+  "function setPack(address)",
+  "function totalMinted() view returns (uint256)",
+  "function totalSet() view returns (uint256)",
+  "function transferOwnership(address)"
+]

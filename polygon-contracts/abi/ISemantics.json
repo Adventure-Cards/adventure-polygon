@@ -1,0 +1,3 @@
+[
+  "function getSemantics(uint256) view returns (bytes)"
+]
