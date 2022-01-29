@@ -24,16 +24,27 @@ async function main() {
   const data = fs.readFileSync('../snapshot/snapshot.csv', 'utf8');
   const owners = data.split('\n');
 
-  owners.forEach(async (line) => {
-    // console.log(line);
-    const [cardId, ownerAddress] = line.split(';');
-    await snapshot.setOwners([ownerAddress], [cardId]);
-  });
+  // let group = [];
+  // for (let i = 0; i < owners.length; i++) {
+  //   group.push(owners[i].pop());
+  //   console.log(group);
+  //   if (i % 20 == 0) {
+  //     group = [];
+  //   }
+  // }
 
-  console.log('feezing!');
-  await snapshot.freeze();
-  console.log('minting!');
-  await snapshot.mint(1, 3);
+  // owners.forEach(async (line) => {
+  //   console.log(line);
+  //   const [cardId, ownerAddress] = line.split(';');
+
+  //   await snapshot.setOwners([ownerAddress], [cardId]);
+  //   console.log('done');
+  // });
+
+  // console.log('feezing!');
+  // await snapshot.freeze();
+  // console.log('minting!');
+  // await snapshot.mint(1, 3);
 }
 
 main().catch((error) => {
