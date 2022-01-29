@@ -5,7 +5,15 @@ async function main() {
   const pack = await Pack.deploy();
   await pack.deployed();
 
-  console.log('Pack deployed to:', pack.address);
+  const AdventureCards = await hre.ethers.getContractFactory('AdventureCards');
+  const adventureCards = await AdventureCards.deploy();
+  await adventureCards.deployed();
+
+  const Snapshot = await hre.ethers.getContractFactory('Snapshot');
+  const shapshot = await Snapshot.deploy();
+  await shapshot.deployed();
+
+  console.log('Deployed:', pack.address);
 }
 
 main().catch((error) => {

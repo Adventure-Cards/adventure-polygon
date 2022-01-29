@@ -49,3 +49,7 @@ the unbundling process starting. The contract allows setting individual URLs
 with art for each card type in order to support the art that is currently
 uploaded to arweave. The contract also provides a hook for card semantics
 which can be useful for the future development of the game.
+
+## Deploy Test
+
+runDeploy localhost ./scripts/deploy.js
