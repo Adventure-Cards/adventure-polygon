@@ -37,7 +37,7 @@ contract Snapshot is Ownable {
 
   // An event emitted when the pack is set
   event PackSet(address _pack);
- 
+
   constructor() {}
 
   /**
@@ -45,7 +45,7 @@ contract Snapshot is Ownable {
    *
    * @param _owners An array of pack owners
    * @param _packs An array of pack IDs matching the owners
-   */ 
+   */
   function setOwners(address[] calldata _owners, uint256[] calldata _packs) external onlyOwner {
     require(!frozen, "Loading cards has been frozen");
     require(_owners.length == _packs.length, "length mismatch");

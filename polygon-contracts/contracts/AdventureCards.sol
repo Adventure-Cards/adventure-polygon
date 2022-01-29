@@ -71,7 +71,7 @@ contract AdventureCards is ERC1155Burnable, ERC1155Supply, Ownable {
   }
 
   /**
-   * @dev An override of the uri() method that returns individual card URIs if 
+   * @dev An override of the uri() method that returns individual card URIs if
    * they are set
    *
    * @param tokenId The ID of the card to check get the URI for
@@ -88,7 +88,7 @@ contract AdventureCards is ERC1155Burnable, ERC1155Supply, Ownable {
   /**
    * @dev A pass-through method for getting semantics for a card. The semantics
    * is returned as bytes and it is up to the client to interpret those.
-   * 
+   *
    * @param tokenId The ID of the card to check get the semantics for
    * @return The card semantics as bytes
    */
@@ -107,7 +107,7 @@ contract AdventureCards is ERC1155Burnable, ERC1155Supply, Ownable {
   }
 
   /**
-   * @dev An admin methods to define a card type and its URI. 
+   * @dev An admin methods to define a card type and its URI.
    *
    * @param card The name of the card type
    * @param uri_ The custom URI for this card type

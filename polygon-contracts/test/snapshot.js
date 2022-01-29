@@ -5,15 +5,15 @@ const {
   constants,
   balance,
   send,
-} = require("@openzeppelin/test-helpers");
-const { web3 } = require("@openzeppelin/test-helpers/src/setup");
-const { assert, expect } = require("chai");
-const { artifacts } = require("hardhat");
+} = require('@openzeppelin/test-helpers');
+const { web3 } = require('@openzeppelin/test-helpers/src/setup');
+const { assert, expect } = require('chai');
+const { artifacts } = require('hardhat');
 
-const Pack = artifacts.require("Pack");
-const Snapshot = artifacts.require("Snapshot");
+const Pack = artifacts.require('Pack');
+const Snapshot = artifacts.require('Snapshot');
 
-describe("Snapshot minting test", async function () {
+describe('Snapshot minting test', async function () {
   let packs;
   let accounts;
   let owner;
@@ -25,12 +25,12 @@ describe("Snapshot minting test", async function () {
     accounts = await web3.eth.getAccounts();
     owner = accounts[0];
     recipients = [accounts[1], accounts[1], accounts[2], accounts[2]];
-    packs = ["0", "1", "2", "3"];
+    packs = ['0', '1', '2', '3'];
     pack = await Pack.new({ from: owner });
     snapshot = await Snapshot.new({ from: owner });
   });
 
-  it("Owner is set and can be changed, only happy paths", async function () {
+  it('Owner is set and can be changed, only happy paths', async function () {
     assert.equal(await snapshot.owner(), owner);
     const newOwner = accounts[2];
     await snapshot.transferOwnership(newOwner, { from: owner });
@@ -39,26 +39,26 @@ describe("Snapshot minting test", async function () {
     assert.equal(await snapshot.owner(), constants.ZERO_ADDRESS);
   });
 
-  it("Methods are protected", async function () {
+  it('Methods are protected', async function () {
     await expectRevert(
       snapshot.setOwners([], [], { from: accounts[2] }),
-      "Ownable: caller is not the owner"
+      'Ownable: caller is not the owner'
     );
     await expectRevert(
       snapshot.mint(0, 0, { from: accounts[2] }),
-      "Ownable: caller is not the owner"
+      'Ownable: caller is not the owner'
     );
     await expectRevert(
       snapshot.freeze({ from: accounts[2] }),
-      "Ownable: caller is not the owner"
+      'Ownable: caller is not the owner'
     );
     await expectRevert(
       snapshot.setPack(pack.address, { from: accounts[2] }),
-      "Ownable: caller is not the owner"
+      'Ownable: caller is not the owner'
     );
   });
 
-  it("Happy path with freezeing checks", async function () {
+  it('Happy path with freezeing checks', async function () {
     await snapshot.setPack(pack.address, { from: owner });
     await pack.setSnapshot(snapshot.address, true, { from: owner });
 
@@ -76,7 +76,7 @@ describe("Snapshot minting test", async function () {
     // no premature mint
     await expectRevert(
       snapshot.mint(0, 4, { from: owner }),
-      "Freeze loading cards first"
+      'Freeze loading cards first'
     );
 
     // freeze
@@ -85,7 +85,7 @@ describe("Snapshot minting test", async function () {
     // not more setting
     await expectRevert(
       snapshot.setOwners(recipients, packs, { from: owner }),
-      "Loading cards has been frozen"
+      'Loading cards has been frozen'
     );
 
     // now mint in two steps
@@ -104,20 +104,20 @@ describe("Snapshot minting test", async function () {
     // no unset mints
     await expectRevert(
       snapshot.mint(5, 6, { from: owner }),
-      "Owner is not set"
+      'Owner is not set'
     );
 
     // no repeat mint actions
-    await expectRevert(snapshot.mint(0, 4, { from: owner }), "Already minted");
+    await expectRevert(snapshot.mint(0, 4, { from: owner }), 'Already minted');
 
     // no more actions
     await expectRevert(
       snapshot.freeze({ from: owner }),
-      "The snapshot has been frozen forever"
+      'The snapshot has been frozen forever'
     );
     await expectRevert(
       snapshot.setPack(pack.address, { from: owner }),
-      "The snapshot has been frozen forever"
+      'The snapshot has been frozen forever'
     );
   });
 });
