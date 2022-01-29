@@ -13,6 +13,10 @@ async function main() {
   const shapshot = await Snapshot.deploy();
   await shapshot.deployed();
 
+  await pack.setAdventureCards(adventureCards.address); // where individual cards are stored
+  await pack.setSnapshot(shapshot.address, true); // so only snapshot can update the pack
+  await shapshot.setPack(pack.address); // needs to mint
+
   console.log('Deployed:', pack.address);
 }
 
