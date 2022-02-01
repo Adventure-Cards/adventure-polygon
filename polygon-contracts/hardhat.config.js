@@ -18,7 +18,6 @@ module.exports = {
       },
     },
   },
-
   contractSizer: {
     alphaSort: true,
     disambiguatePaths: false,
@@ -42,11 +41,12 @@ module.exports = {
   },
 
   networks: {
-    hardhat: {
-      forking: {
-        url: credentials.rpc,
-      },
-    },
+    localhost: { accounts: [`${credentials.private_key}`] },
+    // hardhat: {
+    //   forking: {
+    //     url: credentials.rpc,
+    //   },
+    // },
   },
   mocha: {
     timeout: 200000,
