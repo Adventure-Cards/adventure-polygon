@@ -24,26 +24,32 @@ async function main() {
   let allOwners = [];
   let allCards = [];
 
-  for (let i = 0; i < owners.length; i++) {
-    console.log('---', i);
-    const [cardId, ownerAddress] = owners[i].split(';');
-    allCards.push(cardId);
-    allOwners.push(ownerAddress);
+  // for (let i = 0; i < owners.length; i++) {
+  //   console.log('---', i);
+  //   const [cardId, ownerAddress] = owners[i].split(';');
+  //   allCards.push(cardId);
+  //   allOwners.push(ownerAddress);
 
-    if (allCards.length >= 50) {
-      console.log('set owners', i, allCards.length);
-      await snapshot.setOwners(allOwners, allCards);
-      allOwners = [];
-      allCards = [];
-    }
-  }
+  //   if (allCards.length >= 50) {
+  //     console.log('set owners', i, allCards.length);
+  //     await snapshot.setOwners(allOwners, allCards);
+  //     allOwners = [];
+  //     allCards = [];
+  //   }
+  // }
 
   console.log('done');
 
   // console.log('feezing!');
   // await snapshot.freeze();
   // console.log('minting!');
-  // await snapshot.mint(1, 3);
+
+  const startMint = 1;
+  const mintSize = 20;
+  while (startMint < 8000) {
+    console.log('---', startMint, startMint + mintSize);
+    await snapshot.mint(startMint, startMint + mintSize);
+  }
 }
 
 main().catch((error) => {
