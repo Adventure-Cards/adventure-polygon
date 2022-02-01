@@ -1,6 +1,5 @@
 const hre = require('hardhat');
 const fs = require('fs');
-const { getHeapSnapshot } = require('v8');
 
 async function main() {
   const Pack = await hre.ethers.getContractFactory('Pack');
@@ -10,41 +9,17 @@ async function main() {
   const AdventureCards = await hre.ethers.getContractFactory('AdventureCards');
   const adventureCards = await AdventureCards.deploy();
   await adventureCards.deployed();
+  console.log('Deployed card:', pack.address);
 
   const Snapshot = await hre.ethers.getContractFactory('Snapshot');
   const snapshot = await Snapshot.deploy();
   await snapshot.deployed();
+  console.log('Deployed snapshot:', pack.address);
 
   await pack.setAdventureCards(adventureCards.address); // where individual cards are stored
   await pack.setSnapshot(snapshot.address, true); // so only snapshot can update the pack
   await snapshot.setPack(pack.address); // needs to mint
-
-  console.log('Deployed:', pack.address);
-
-  const data = fs.readFileSync('../snapshot/snapshot.csv', 'utf8');
-  const owners = data.split('\n');
-
-  // let group = [];
-  // for (let i = 0; i < owners.length; i++) {
-  //   group.push(owners[i].pop());
-  //   console.log(group);
-  //   if (i % 20 == 0) {
-  //     group = [];
-  //   }
-  // }
-
-  // owners.forEach(async (line) => {
-  //   console.log(line);
-  //   const [cardId, ownerAddress] = line.split(';');
-
-  //   await snapshot.setOwners([ownerAddress], [cardId]);
-  //   console.log('done');
-  // });
-
-  // console.log('feezing!');
-  // await snapshot.freeze();
-  // console.log('minting!');
-  // await snapshot.mint(1, 3);
+  console.log('Deployed pack:', pack.address);
 }
 
 main().catch((error) => {
