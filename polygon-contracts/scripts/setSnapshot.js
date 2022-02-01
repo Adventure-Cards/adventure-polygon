@@ -36,10 +36,6 @@ async function main() {
   });
   console.log('done');
 
-  // for (let i = 0; i < allOwners.length / 10; i++) {
-  //   const a = allCards.pop();
-  //   console.log('file: deploy.js ~ line 49 ~ main ~ a', a);
-  // }
   // console.log('feezing!');
   // await snapshot.freeze();
   // console.log('minting!');
