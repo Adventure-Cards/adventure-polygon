@@ -7,36 +7,37 @@ const credentials = require('../credentials.json');
 async function main() {
   console.log('start');
 
-  const provider = new ethers.providers.JsonRpcProvider(credentials.rpc);
+  const provider = new hre.ethers.providers.JsonRpcProvider(credentials.rpc);
   await provider.ready;
-  const signer = new ethers.Wallet(credentials.private_key, provider);
+  const signer = new hre.ethers.Wallet(credentials.private_key, provider);
 
-  // Deployed card: 0x0165878A594ca255338adfa4d48449f69242Eb8F
-  // Deployed snapshot: 0x0165878A594ca255338adfa4d48449f69242Eb8F
-  // Deployed pack: 0x0165878A594ca255338adfa4d48449f69242Eb8F
+  // Deployed pack: 0x391342f5acAcaaC9DE1dC4eC3E03f2678f7c78F1
+  // Deployed card: 0x6d925938Edb8A16B3035A4cF34FAA090f490202a
+  // Deployed snapshot: 0xED8CAB8a931A4C0489ad3E3FB5BdEA84f74fD23E
 
   const abi = require('../abi/Snapshot.json');
-  const address = '0x0165878A594ca255338adfa4d48449f69242Eb8F';
-  const snapshot = new ethers.Contract(address, abi, signer);
+  const address = '0xED8CAB8a931A4C0489ad3E3FB5BdEA84f74fD23E';
+  const snapshot = new hre.ethers.Contract(address, abi, signer);
 
   const data = fs.readFileSync('../snapshot/snapshot.csv', 'utf8');
   const owners = data.split('\n');
   let allOwners = [];
   let allCards = [];
 
-  owners.forEach(async (line) => {
-    const [cardId, ownerAddress] = line.split(';');
+  for (let i = 0; i < owners.length; i++) {
+    // console.log('---', owners[i]);
+    const [cardId, ownerAddress] = owners[i].split(',');
     allCards.push(cardId);
     allOwners.push(ownerAddress);
 
-    if (allCards.length == 3) {
+    if (allCards.length >= 3) {
+      console.log('set owners', i, allCards.length);
       await snapshot.setOwners(allOwners, allCards);
-
-      console.log(allCards[0]);
       allOwners = [];
       allCards = [];
     }
-  });
+  }
+
   console.log('done');
 
   // console.log('feezing!');
