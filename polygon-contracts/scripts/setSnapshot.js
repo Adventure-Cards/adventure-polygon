@@ -25,12 +25,12 @@ async function main() {
   let allCards = [];
 
   for (let i = 0; i < owners.length; i++) {
-    // console.log('---', owners[i]);
-    const [cardId, ownerAddress] = owners[i].split(',');
+    console.log('---', i);
+    const [cardId, ownerAddress] = owners[i].split(';');
     allCards.push(cardId);
     allOwners.push(ownerAddress);
 
-    if (allCards.length >= 3) {
+    if (allCards.length >= 50) {
       console.log('set owners', i, allCards.length);
       await snapshot.setOwners(allOwners, allCards);
       allOwners = [];
